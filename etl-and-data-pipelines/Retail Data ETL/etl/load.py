@@ -1,12 +1,16 @@
 from sqlalchemy import  create_engine
 import psycopg2
+import os
+from dotenv import load_dotenv
+
 
 def load_data(fact_sales,dim_store,dim_feature,dim_date):
-    dbname = 'retail_db'
-    db_host= 'localhost'
-    db_port=5432
-    db_pass ='DB123'
-    db_user= 'postgres'
+    load_dotenv()
+    dbname =os.getenv("dbname")
+    db_host= os.getenv("db_host")
+    db_port=os.getenv("db_port")
+    db_pass =os.getenv("db_pass")
+    db_user= os.getenv("db_user")
 
     engine = create_engine(f'postgresql+psycopg2://{db_user}:{db_pass}@{db_host}:{db_port}/{dbname}')
 
